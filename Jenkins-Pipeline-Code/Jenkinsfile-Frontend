@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git credentialsId: 'GITHUB', url: ''
+                git credentialsId: 'GITHUB', url: 'https://github.com/Ibrahim-Sahabi/THREE-TIER-MERN-STACK-APPLICATION.git'
             }
         }
         stage('Sonarqube Analysis') {
@@ -82,20 +82,20 @@ pipeline {
         }
         stage('Checkout Code') {
             steps {
-                git credentialsId: 'GITHUB', url: ''
+                git credentialsId: 'GITHUB', url: 'https://github.com/Ibrahim-Sahabi/THREE-TIER-MERN-STACK-APPLICATION.git'
             }
         }
         stage('Update Deployment file') {
             environment {
-                GIT_REPO_NAME = ""
+                GIT_REPO_NAME = "https://github.com/Ibrahim-Sahabi/THREE-TIER-MERN-STACK-APPLICATION.git"
                 GIT_USER_NAME = "Ibrahim-Sahabi"
             }
             steps {
                 dir('Kubernetes-Manifests-file/Frontend') {
                     withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                         sh '''
-                            git config user.email "aman07pathak@gmail.com"
-                            git config user.name "AmanPathak-DevOps"
+                            git config user.email "isahabi@yahoo.com"
+                            git config user.name "Ibrahim-Sahabi"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
                             imageTag=$(grep -oP '(?<=frontend:)[^ ]+' deployment.yaml)
